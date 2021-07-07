@@ -19,4 +19,6 @@ public interface BlogDao {
     int updateByPrimaryKeySelective(Blog record);
 
     int updateByPrimaryKey(Blog record);
+
+
 }
