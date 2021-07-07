@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.mybatisPlugin.dao.mapping.BlogDao">
+  <resultMap id="BaseResultMap" type="com.chen.mybatisPlugin.model.Blog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="publish" jdbcType="TIMESTAMP" property="publish" />
+    <result column="views" jdbcType="INTEGER" property="views" />
+    <result column="blogername" jdbcType="VARCHAR" property="blogername" />
+    <result column="ispick" jdbcType="TINYINT" property="ispick" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, url, publish, views, blogername, ispick
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.chen.mybatisPlugin.model.Blog" useGeneratedKeys="true">
+    insert into blog (title, url, publish, 
+      views, blogername, ispick
+      )
+    values (#{title,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{publish,jdbcType=TIMESTAMP}, 
+      #{views,jdbcType=INTEGER}, #{blogername,jdbcType=VARCHAR}, #{ispick,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.chen.mybatisPlugin.model.Blog" useGeneratedKeys="true">
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        title,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="publish != null">
+        publish,
+      </if>
+      <if test="views != null">
+        views,
+      </if>
+      <if test="blogername != null">
+        blogername,
+      </if>
+      <if test="ispick != null">
+        ispick,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="publish != null">
+        #{publish,jdbcType=TIMESTAMP},
+      </if>
+      <if test="views != null">
+        #{views,jdbcType=INTEGER},
+      </if>
+      <if test="blogername != null">
+        #{blogername,jdbcType=VARCHAR},
+      </if>
+      <if test="ispick != null">
+        #{ispick,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chen.mybatisPlugin.model.Blog">
+    update blog
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="publish != null">
+        publish = #{publish,jdbcType=TIMESTAMP},
+      </if>
+      <if test="views != null">
+        views = #{views,jdbcType=INTEGER},
+      </if>
+      <if test="blogername != null">
+        blogername = #{blogername,jdbcType=VARCHAR},
+      </if>
+      <if test="ispick != null">
+        ispick = #{ispick,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chen.mybatisPlugin.model.Blog">
+    update blog
+    set title = #{title,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      publish = #{publish,jdbcType=TIMESTAMP},
+      views = #{views,jdbcType=INTEGER},
+      blogername = #{blogername,jdbcType=VARCHAR},
+      ispick = #{ispick,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

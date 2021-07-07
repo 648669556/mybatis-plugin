@@ -1,0 +1,17 @@
+server:
+  port: 8080
+mybatis:
+  mapper-locations: classpath:mapper/*xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+spring:
+#  datasource:
+#    name: defaultDataSource
+#    url: jdbc:mysql://192.168.201.129:3306/spider?serverTimezone=UTC
+#    username: root
+#    password: Chen123456;
+  datasource:
+    name: defaultDataSource
+    url: jdbc:mysql://localhost:3306/spider?serverTimezone=UTC
+#    username: root
+#    password: Chen123456;
