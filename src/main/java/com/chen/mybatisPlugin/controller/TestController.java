@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @PostMapping(value = "/test/sql",produces = {"applictaion/json;charset=utf-8"})
+    @PostMapping(value = "/test/sql", produces = {"application/json;charset=utf-8"})
     public String testSql(@RequestBody SqlRequest sqlRequest) {
-        return JSON.toJSONString(sqlRequest);
+        String jsonString = JSON.toJSONString(sqlRequest);
+        System.out.println(jsonString);
+        return jsonString;
     }
 }

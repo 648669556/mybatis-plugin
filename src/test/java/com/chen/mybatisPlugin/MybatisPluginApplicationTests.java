@@ -15,12 +15,13 @@ class MybatisPluginApplicationTests {
 
     @Test
     void contextLoads() {
-        Blog blog = blogService.selectByPrimaryKey(1420226);
-        System.out.println(blog);
+        for (int i = 0; i < 10; i++) {
+            Blog blog = blogService.selectByPrimaryKey(1420226);
+        }
     }
 
     @Test
-    void test2(){
+    void test2() {
         Blog blog = new Blog();
         blog.setTitle("测试?使用");
         blog.setBlogername("测试使用");
@@ -28,16 +29,19 @@ class MybatisPluginApplicationTests {
         blog.setViews(10);
         blog.setUrl("www.baidu.com");
         blog.setIspick(0);
-        int insert = blogService.insert(blog);
-        System.out.println(insert);
+        for (int i = 0; i < 10; i++) {
+            int insert = blogService.insert(blog);
+        }
     }
 
     @Test
-    void test3(){
+    void test3() {
         Blog blog = new Blog();
         blog.setTitle("测试使用");
         blog.setId(1420226);
-        blogService.updateByPrimaryKeySelective(blog);
+        for (int i = 0; i < 10; i++) {
+            blogService.updateByPrimaryKeySelective(blog);
+        }
     }
 
 }

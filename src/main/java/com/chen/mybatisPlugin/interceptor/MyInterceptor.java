@@ -1,5 +1,7 @@
 package com.chen.mybatisPlugin.interceptor;
 
+import com.chen.mybatisPlugin.model.SqlRequest;
+import com.chen.mybatisPlugin.task.SendTask;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
@@ -20,6 +22,13 @@ import java.util.regex.Matcher;
         @Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class,
                 RowBounds.class, ResultHandler.class})})
 public class MyInterceptor implements Interceptor {
+
+    private final SendTask sendTask;
+
+    public MyInterceptor(SendTask sendTask) {
+        this.sendTask = sendTask;
+    }
+
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         try {
@@ -36,6 +45,9 @@ public class MyInterceptor implements Interceptor {
             System.out.println("===============");
             System.out.println(sql);
             System.out.println("===============");
+            SqlRequest sqlRequest = new SqlRequest();
+            sqlRequest.setSql(sql);
+            sendTask.doPost(sqlRequest);
         } catch (Exception e) {
             e.printStackTrace();
         }
