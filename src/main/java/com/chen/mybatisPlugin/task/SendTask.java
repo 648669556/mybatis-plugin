@@ -16,17 +16,17 @@ import java.io.IOException;
 /**
  * @author 陈俊宏
  */
-@Component
 public class SendTask {
     final CloseableHttpClient httpClient;
+    final String targetUrl;
 
-    @Autowired
-    public SendTask(CloseableHttpClient httpClient) {
+    public SendTask(CloseableHttpClient httpClient, String targetUrl) {
         this.httpClient = httpClient;
+        this.targetUrl = targetUrl;
     }
 
     public void doPost(SqlRequest sqlRequest) throws IOException {
-        HttpPost httpPost = new HttpPost("http://localhost:8080/test/sql");
+        HttpPost httpPost = new HttpPost(targetUrl);
         String jsonString = JSON.toJSONString(sqlRequest);
         StringEntity entity = new StringEntity(jsonString, "UTF-8");
         httpPost.setEntity(entity);

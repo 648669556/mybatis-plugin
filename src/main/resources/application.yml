@@ -17,3 +17,4 @@ spring:
 #    password: Chen123456;
 sendTask:
   tryTimes: 3
+  targetUrl: http://www.baidu.com

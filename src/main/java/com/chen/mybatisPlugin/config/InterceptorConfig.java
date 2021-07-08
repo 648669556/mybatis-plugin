@@ -31,7 +31,8 @@ import java.util.concurrent.TimeUnit;
 public class InterceptorConfig {
     @Value("${sendTask.tryTimes}")
     private Integer tryTimes;
-
+    @Value("${sendTask.targetUrl}")
+    private String targetUrl;
     @Bean
     public CloseableHttpClient createClient(@Autowired HttpRequestRetryHandler retryHandler, @Autowired PoolingHttpClientConnectionManager connectionManager) {
         return HttpClients.custom().setConnectionManager(connectionManager).setRetryHandler(retryHandler).build();
@@ -90,5 +91,10 @@ public class InterceptorConfig {
     @Bean
     public MyInterceptor myInterceptor(@Autowired SendTask sendTask) {
         return new MyInterceptor(sendTask);
+    }
+
+    @Bean
+    public SendTask getSendTask(@Autowired CloseableHttpClient client){
+        return new SendTask(client,targetUrl);
     }
 }
